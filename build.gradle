@@ -1,0 +1,137 @@
+plugins {
+    id 'com.gradle.build-scan' version '1.12.1'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id "com.github.spotbugs" version "1.6.1"
+}
+
+def appAndSourceUrl = 'https://github.com/TNG/ArchUnit'
+def productionProjectNames = ['archunit', 'archunit-junit']
+
+ext {
+    year = "${Calendar.getInstance().get(Calendar.YEAR)}"
+    app = [
+            name   : 'ArchUnit',
+            urls   : [
+                    entry : appAndSourceUrl,
+                    doc   : appAndSourceUrl,
+                    issues: "${appAndSourceUrl}/issues",
+                    source: appAndSourceUrl
+            ],
+            gitRepo: 'git@github.com:TNG/ArchUnit.git',
+            license: [
+                    name: 'The Apache Software License, Version 2.0',
+                    url : 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            ]
+    ]
+    company = [
+            name: 'TNG Technology Consulting GmbH',
+            url : 'https://www.tngtech.com/'
+    ]
+
+    thirdPartyRelocationPackage = 'com.tngtech.archunit.thirdparty'
+    asmRelocationPackage = "${thirdPartyRelocationPackage}.org.objectweb.asm"
+    guavaRelocationPackage = "${thirdPartyRelocationPackage}.com.google"
+
+    dependency = [
+            asm               : 'org.ow2.asm:asm:6.1.1',
+            guava             : 'com.google.guava:guava:19.0',
+            slf4j             : 'org.slf4j:slf4j-api:1.7.7',
+            log4j_api         : 'org.apache.logging.log4j:log4j-api:2.1',
+            log4j_core        : 'org.apache.logging.log4j:log4j-core:2.1',
+            log4j_slf4j       : 'org.apache.logging.log4j:log4j-slf4j-impl:2.1',
+
+            junit             : 'junit:junit:4.12',
+            hamcrest          : 'org.hamcrest:hamcrest-core:1.3',
+            junit_dataprovider: 'com.tngtech.java:junit-dataprovider:1.11.0',
+            mockito           : 'org.mockito:mockito-core:2.13.0',
+            assertj           : 'org.assertj:assertj-core:2.4.1',
+            assertj_guava     : 'org.assertj:assertj-guava:2.0.0'
+    ]
+
+    postfixedJar = { File jarFile, String postfix ->
+        new File(jarFile.parentFile, jarFile.name.replaceAll(/\.jar$/, "-${postfix}.jar"))
+    }
+
+    tempJar = { File jarFile -> postfixedJar(jarFile, 'tmp') }
+
+    productionProjects = subprojects.findAll { productionProjectNames.contains(it.name) }
+    createModuleDescription = { description, proj -> "${description} - Module '${proj.name}'" }
+
+    addTestJarTo = { proj ->
+        proj.with {
+            configurations {
+                tests.extendsFrom testRuntime
+            }
+
+            task testJar(type: Jar) {
+                classifier = 'tests'
+                from sourceSets.test.output
+            }
+
+            artifacts {
+                tests testJar
+            }
+        }
+    }
+
+    configureSlowTestsFor = { proj ->
+        proj.with {
+            test {
+                if (!project.hasProperty('allTests')) {
+                    useJUnit {
+                        excludeCategories 'com.tngtech.archunit.Slow'
+                    }
+                }
+            }
+        }
+    }
+
+    currentScriptRootOf = { it.buildscript.sourceFile.parentFile }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.7'
+}
+
+allprojects {
+    group = 'com.tngtech.archunit'
+    version = '1.0.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+description = 'A Java architecture test library, to specify and assert architecture rules in plain Java'
+
+task clean {
+    doLast {
+        project.buildDir.deleteDir()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    description createModuleDescription(rootProject.description, project)
+
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+
+    javadoc {
+        options.addBooleanOption('html5', true)
+    }
+
+    test {
+        maxHeapSize = "2G"
+
+        testLogging {
+            events "failed"
+            exceptionFormat "full"
+        }
+
+        ignoreFailures = project.hasProperty('ignoreTestFailures')
+    }
+}
+
+apply from: 'build-steps/build-steps.gradle'

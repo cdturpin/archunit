@@ -1,0 +1,14 @@
+.gradle
+.idea
+*.iml
+build
+out
+target
+.project
+.settings
+.classpath
+_site
+.sass-cache
+.jekyll-metadata
+.asciidoctor
+verification-results

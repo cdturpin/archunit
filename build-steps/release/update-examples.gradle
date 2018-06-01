@@ -1,0 +1,58 @@
+import groovy.io.FileType
+
+import java.util.regex.Pattern
+
+final String archunitExamplesGitRepo = 'https://github.com/TNG/ArchUnit-Examples.git'
+final File checkoutDir = new File(project.buildDir, 'example-update')
+
+task checkoutArchUnitExample {
+    doLast {
+        gitCheckOut(archunitExamplesGitRepo, checkoutDir)
+    }
+}
+
+task copyArchUnitExampleSrc(dependsOn: checkoutArchUnitExample) {
+    doLast {
+        def targetSource = new File(checkoutDir, 'src')
+        targetSource.deleteDir()
+        copy {
+            from new File(project(':archunit-example').projectDir, 'src')
+            into targetSource
+        }
+    }
+}
+
+task removeArchUnitExampleCategory(dependsOn: copyArchUnitExampleSrc) {
+    doLast {
+        new File(checkoutDir, 'src/test/java/com/tngtech/archunit/exampletest/Example.java').delete()
+
+        def removeLines = { File file, List<String> linesToRemove ->
+            def regex = "(${linesToRemove.collect { Pattern.quote(it) }.join('|')})\n"
+            file.text = file.text.replaceAll(regex, '')
+        }
+
+        new File(checkoutDir, 'src').traverse(type: FileType.FILES, nameFilter: { it.endsWith('.java') }) { File file ->
+            removeLines(file, [
+                    '@Category(Example.class)',
+                    'import org.junit.experimental.categories.Category;',
+                    'import com.tngtech.archunit.exampletest.Example;'
+            ])
+        }
+    }
+}
+
+task updateArchUnitExampleVersion(dependsOn: checkoutArchUnitExample) {
+    doLast {
+        def buildFile = new File(checkoutDir, 'build.gradle')
+        buildFile.text = buildFile.text.replaceAll(/(com\.tngtech\.archunit:archunit-junit:)[\d.]*/, "\$1${version}")
+    }
+}
+
+task updateArchUnitExample(dependsOn: [
+        checkoutArchUnitExample,
+        updateArchUnitExampleVersion,
+        copyArchUnitExampleSrc,
+        removeArchUnitExampleCategory]) {
+
+    ext.checkoutDir = checkoutDir
+}
