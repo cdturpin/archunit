@@ -35,7 +35,7 @@ import static com.tngtech.archunit.PublicAPI.Usage.INHERITANCE;
  * be determined, that the {@link ImportOption} would choose different classes to be selected for this run)
  */
 @PublicAPI(usage = INHERITANCE)
-public interface ImportOption {
+public interface ImportOption { 
     boolean includes(Location location);
 
     enum Predefined implements ImportOption {

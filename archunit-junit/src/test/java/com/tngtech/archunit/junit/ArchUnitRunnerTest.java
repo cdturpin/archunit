@@ -1,14 +1,12 @@
 package com.tngtech.archunit.junit;
 
+import static com.tngtech.archunit.core.domain.TestUtils.importClasses;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.Set;
 
-import com.tngtech.archunit.core.domain.JavaClass;
-import com.tngtech.archunit.core.importer.Location;
-import com.tngtech.archunit.core.importer.Locations;
-import com.tngtech.archunit.junit.ArchUnitRunner.SharedCache;
-import com.tngtech.archunit.lang.ArchCondition;
-import com.tngtech.archunit.lang.ArchRule;
-import com.tngtech.archunit.lang.ConditionEvents;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,12 +17,15 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static com.tngtech.archunit.core.domain.TestUtils.importClasses;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import com.tngtech.archunit.core.domain.JavaClass;
+import com.tngtech.archunit.core.importer.Location;
+import com.tngtech.archunit.core.importer.Locations;
+import com.tngtech.archunit.junit.ArchUnitRunner.SharedCache;
+import com.tngtech.archunit.lang.ArchCondition;
+import com.tngtech.archunit.lang.ArchRule;
+import com.tngtech.archunit.lang.ConditionEvents;
 
-public class ArchUnitRunnerTest {
+public class ArchUnitRunnerTest { 
     @Rule
     public final MockitoRule mockitoRule = MockitoJUnit.rule();
 

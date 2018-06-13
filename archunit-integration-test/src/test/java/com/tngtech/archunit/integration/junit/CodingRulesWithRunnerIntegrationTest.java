@@ -3,6 +3,7 @@ package com.tngtech.archunit.integration.junit;
 import com.tngtech.archunit.integration.CodingRulesIntegrationTest;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
+import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.junit.ArchUnitIntegrationTestRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_USE_JAVA_UTIL_LOGGING;
 
+@SuppressWarnings("unused")
 @RunWith(ArchUnitIntegrationTestRunner.class)
 @AnalyzeClasses(packages = "com.tngtech.archunit.example")
 public class CodingRulesWithRunnerIntegrationTest {

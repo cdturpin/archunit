@@ -11,7 +11,7 @@ import com.tngtech.archunit.core.importer.Locations;
 @interface LocationOfClass {
     Class<?> value();
 
-    class Provider implements LocationProvider {
+    class Provider implements LocationProvider { 
         @Override
         public Set<Location> get(Class<?> testClass) {
             return Locations.ofClass(testClass.getAnnotation(LocationOfClass.class).value());

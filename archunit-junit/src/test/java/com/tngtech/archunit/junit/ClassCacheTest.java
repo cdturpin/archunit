@@ -3,14 +3,11 @@ package com.tngtech.archunit.junit;
 import java.util.Collections;
 import java.util.Set;
 
+import com.tngtech.archunit.junit.LocationOfClass;
+import com.tngtech.archunit.testutil.ArchConfigurationRule;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaClasses;
-import com.tngtech.archunit.core.importer.ImportOption;
-import com.tngtech.archunit.core.importer.ImportOptions;
-import com.tngtech.archunit.core.importer.Location;
-import com.tngtech.archunit.core.importer.Locations;
-import com.tngtech.archunit.junit.ClassCache.CacheClassFileImporter;
-import com.tngtech.archunit.testutil.ArchConfigurationRule;
+
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
@@ -24,8 +21,15 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static com.tngtech.archunit.junit.CacheMode.PER_CLASS;
+import com.tngtech.archunit.core.importer.ImportOption;
+import com.tngtech.archunit.core.importer.ImportOptions;
+import com.tngtech.archunit.core.importer.Location;
+import com.tngtech.archunit.core.importer.Locations;
+
+
+import static com.tngtech.archunit.junit.ClassCache.CacheClassFileImporter;
 import static com.tngtech.archunit.testutil.Assertions.assertThatClasses;
+import static com.tngtech.archunit.junit.CacheMode.PER_CLASS;
 import static com.tngtech.java.junit.dataprovider.DataProviders.$;
 import static com.tngtech.java.junit.dataprovider.DataProviders.$$;
 import static org.assertj.core.api.Assertions.assertThat;

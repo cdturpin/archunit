@@ -16,11 +16,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import com.tngtech.archunit.core.domain.JavaClasses;
 import static com.tngtech.archunit.core.domain.TestUtils.importClassesWithContext;
 import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.ArchTestWithIgnoredMethod.toBeIgnored;
 import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.ArchTestWithIllegalTestMethods.noParams;
 import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.ArchTestWithIllegalTestMethods.tooManyParams;
-import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.ArchTestWithTestMethod.testSomething;
+import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.ArchTestWithTestMethod.testSomething; 
 import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.IgnoredArchTest.toBeIgnoredOne;
 import static com.tngtech.archunit.junit.ArchUnitRunnerRunsMethodsTest.IgnoredArchTest.toBeIgnoredTwo;
 import static com.tngtech.archunit.junit.ArchUnitRunnerTestUtils.getRule;
@@ -32,6 +33,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@SuppressWarnings("unused")
 public class ArchUnitRunnerRunsMethodsTest {
     @Rule
     public final MockitoRule mockitoRule = MockitoJUnit.rule();

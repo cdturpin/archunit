@@ -32,7 +32,7 @@ import static com.tngtech.archunit.PublicAPI.State.STABLE;
  */
 @Internal
 @Inherited
-public @interface PublicAPI {
+public @interface PublicAPI { 
     /**
      * Marks how this API is supposed to be used.
      *

@@ -1,5 +1,9 @@
 package com.tngtech.archunit.core.importer;
 
+import static com.tngtech.archunit.core.domain.SourceTest.urlOf;
+import static com.tngtech.archunit.core.importer.ClassFileSourceTest.MODULE_INFO_FILE_NAME;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,10 +16,6 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.junit.Test;
-
-import static com.tngtech.archunit.core.domain.SourceTest.urlOf;
-import static com.tngtech.archunit.core.importer.ClassFileSourceTest.MODULE_INFO_FILE_NAME;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ModuleLocationFactoryTest {
     private ModuleLocationFactory locationFactory = new ModuleLocationFactory();

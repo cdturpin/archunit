@@ -17,7 +17,7 @@ package com.tngtech.archunit.core.importer;
 
 import java.util.Objects;
 
-class NormalizedResourceName {
+class NormalizedResourceName { 
     private final String resourceName;
 
     private NormalizedResourceName(String resourceName) {

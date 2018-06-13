@@ -12,7 +12,7 @@ import static com.tngtech.archunit.testutil.ReflectionTestUtils.field;
 import static com.tngtech.archunit.testutil.ReflectionTestUtils.method;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ReflectionUtilsTest {
+public class ReflectionUtilsTest { 
     @Test
     public void getAllFields() {
         Collection<Field> fields = ReflectionUtils.getAllFields(Child.class, named("field"));

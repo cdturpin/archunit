@@ -55,7 +55,7 @@ import static com.tngtech.archunit.junit.ArchTestExecution.elementShouldBeIgnore
  * The runner will cache classes between test runs, for details please refer to {@link ClassCache}.
  */
 @PublicAPI(usage = ACCESS)
-public class ArchUnitRunner extends ParentRunner<ArchTestExecution> {
+public class ArchUnitRunner extends ParentRunner<ArchTestExecution> { 
     private SharedCache cache = new SharedCache(); // NOTE: We want to change this in tests -> no static/final reference
 
     @Internal

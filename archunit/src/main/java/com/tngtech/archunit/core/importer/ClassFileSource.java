@@ -37,7 +37,7 @@ import com.google.common.base.Supplier;
 import com.google.common.collect.FluentIterable;
 import com.tngtech.archunit.Internal;
 
-interface ClassFileSource extends Iterable<ClassFileLocation> {
+interface ClassFileSource extends Iterable<ClassFileLocation> { 
     @Internal
     class FromFilePath extends SimpleFileVisitor<Path> implements ClassFileSource {
         private final Set<ClassFileLocation> classFileLocations = new HashSet<>();

@@ -15,7 +15,7 @@
  */
 package com.tngtech.archunit.junit;
 
-class ArchTestExecutionException extends RuntimeException {
+class ArchTestExecutionException extends RuntimeException { 
     ArchTestExecutionException(String message, Throwable throwable) {
         super(message, throwable);
     }

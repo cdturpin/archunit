@@ -33,7 +33,7 @@ import com.tngtech.archunit.core.domain.properties.CanOverrideDescription;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.tngtech.archunit.PublicAPI.Usage.ACCESS;
 
-public final class JavaClasses implements DescribedIterable<JavaClass>, CanOverrideDescription<JavaClasses> {
+public final class JavaClasses implements DescribedIterable<JavaClass>, CanOverrideDescription<JavaClasses> { 
     private final ImmutableMap<String, JavaClass> classes;
     private final String description;
 

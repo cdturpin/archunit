@@ -15,6 +15,8 @@
  */
 package com.tngtech.archunit.core.importer;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.module.ModuleFinder;
@@ -30,9 +32,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import static com.google.common.base.Preconditions.checkState;
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
+import com.tngtech.archunit.core.importer.ClassFileSource.FileToImport;
 
 class ModuleLocationFactory implements Location.Factory {
     @Override

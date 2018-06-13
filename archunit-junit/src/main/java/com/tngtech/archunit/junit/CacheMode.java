@@ -32,7 +32,7 @@ import static com.tngtech.archunit.PublicAPI.Usage.ACCESS;
  *
  * @see ClassCache
  */
-public enum CacheMode {
+public enum CacheMode {  
     /**
      * Signals that the {@link ClassCache} should cache test classes by location, i.e. between runs of different test classes.
      */

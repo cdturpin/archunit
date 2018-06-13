@@ -18,6 +18,8 @@ package com.tngtech.archunit.junit;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import com.tngtech.archunit.core.importer.ImportOption;
+
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

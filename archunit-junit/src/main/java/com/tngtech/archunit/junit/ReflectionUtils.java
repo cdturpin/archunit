@@ -81,7 +81,7 @@ class ReflectionUtils {
         protected abstract Collection<? extends T> extractFrom(Class<?> type);
     }
 
-    interface Predicate<T> {
+    interface Predicate<T> { 
         boolean apply(T input);
     }
 
